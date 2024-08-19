@@ -1,7 +1,6 @@
 # Notes application
 
 _Create your notes, choose the colour, edit and delete._
-_This project was created with the intention of practising and improving my skills. _
 
 ## Starting 🚀
 
@@ -33,3 +32,5 @@ pnpm run dev
 # o
 yarn dev
 ```
+
+_This project is created with the intention to practice and improve. It is not yet finalised._
