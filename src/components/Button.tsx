@@ -1,8 +1,9 @@
 interface ButtonProps {
   onClick: () => void;
+  children: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick }) => {
+const Button: React.FC<ButtonProps> = ({ onClick, children }) => {
   return (
     <button
       onClick={onClick}
@@ -13,10 +14,13 @@ const Button: React.FC<ButtonProps> = ({ onClick }) => {
         borderRadius: "99px",
         width: "30px",
         height: "30px",
-        marginBottom: '20px'
+        border: "none",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: 'center',
       }}
     >
-      +
+      {children}
     </button>
   );
 };

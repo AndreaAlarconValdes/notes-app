@@ -6,8 +6,10 @@ interface ColorSelectorProps {
 
 const ColorSelector: React.FC<ColorSelectorProps> = ({ onCreate }) => {
   const colors = [
+    "#ffef85",
     "#facf7c",
     "#f4a57d",
+    "#f7a1c4",
     "#be9df9",
     "#5bdafa",
     "#e7f199",

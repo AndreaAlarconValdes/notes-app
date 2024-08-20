@@ -1,0 +1,118 @@
+.radial-menu {
+    position: relative;
+    
+  }
+  
+  
+  .color-button, .delete-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 350ms ease-in-out;
+  }
+  
+  .radial-menu.open .color-button, 
+  .radial-menu.open .delete-button {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .radial-menu.open .color-button:nth-child(2) {
+    top: -40px;
+    transition-delay: 0ms;
+  }
+  
+  .radial-menu.open .color-button:nth-child(3) {
+    top: -33px;
+    left: 33px;
+    transition-delay: 50ms;
+  }
+  
+  .radial-menu.open .color-button:nth-child(4) {
+    top: 0;
+    left: 40px;
+    transition-delay: 100ms;
+  }
+  
+  .radial-menu.open .color-button:nth-child(5) {
+    left: 32px;
+    top: 32px;
+    transition-delay: 150ms;
+  }
+  
+  .radial-menu.open .color-button:nth-child(6) {
+    top: 40px;
+    transition-delay: 200ms;
+  }
+
+  .radial-menu.open .color-button:nth-child(7) {
+    left: -32px;
+    top: 32px;
+    transition-delay: 250ms;
+  }
+  .radial-menu.open .color-button:nth-child(8) {
+    left: -40px;
+    top: 0px;
+    transition-delay: 300ms;
+  }
+  
+  .radial-menu.open .delete-button  {
+    top: -33px;
+    left: -33px;
+    background-color: black;
+    color: white;
+    transition-delay: 350ms;
+  }
+  
+
+  .radial-menu.closing .delete-button {
+    top: -33px;
+    left: -33px;
+    transition-delay: 0ms;
+}
+
+  .radial-menu.closing .color-button:nth-child(8) {
+    left: -40px;
+    top: 0px;
+    transition-delay: 50ms;
+}
+
+.radial-menu.closing .color-button:nth-child(7) {
+    left: -32px;
+    top: 32px;
+    transition-delay: 100ms;
+}
+
+.radial-menu.closing .color-button:nth-child(6) {
+    top: 40px;
+    transition-delay: 150ms;
+}
+
+.radial-menu.closing .color-button:nth-child(5) {
+    left: 32px;
+    top: 32px;
+    transition-delay: 200ms;
+}
+
+.radial-menu.closing .color-button:nth-child(4) {
+    top: 0;
+    left: 40px;
+    transition-delay: 250ms;
+}
+
+.radial-menu.closing .color-button:nth-child(3) {
+    top: -33px;
+    left: 33px;
+    transition-delay: 300ms;
+}
+
+.radial-menu.closing .color-button:nth-child(2) {
+    top: -40px;
+    transition-delay: 350ms;
+}
+

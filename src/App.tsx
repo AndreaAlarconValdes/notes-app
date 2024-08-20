@@ -39,7 +39,7 @@ const App: React.FC = () => {
   const [cardId, setCardId] = useState<number>(4);
 
   const handleAddCardClick = () => {
-    setIsSelectingColor(true);
+    setIsSelectingColor(!isSelectingColor);
   };
 
   const handleCreate = (color: string) => {
@@ -48,11 +48,11 @@ const App: React.FC = () => {
       month: "long",
       day: "numeric",
     });
-
-    setCards([
-      { id: cardId, color, content: "", creationDate: currentDate },
-      ...cards,
-    ]);
+  
+    const newCard: CardData = { id: cardId, color, content: "", creationDate: currentDate };
+  
+    setCards([newCard, ...cards]);
+  
     setCardId(cardId + 1);
     setIsSelectingColor(false);
   };
@@ -65,16 +65,31 @@ const App: React.FC = () => {
     );
   };
 
+  const handleColorChange = (id: number, newColor: string) => {
+    setCards(cards.map((card) =>
+      card.id === id ? { ...card, color: newColor } : card
+    ));
+  };
+
+  const handleDelete = (id: number) => {
+    setCards(cards.filter((card) => card.id !== id));
+  };
+
   return (
     <main className="root">
       <div className="slide">
         {isSelectingColor ? (
           <div>
-            <Button onClick={handleAddCardClick} />
+            <Button onClick={handleAddCardClick} ><span className="material-symbols-outlined" style={{fontSize: '22px'}}>
+add
+</span></Button>
             <ColorSelector onCreate={handleCreate} />
           </div>
         ) : (
-          <Button onClick={handleAddCardClick} />
+          <Button onClick={handleAddCardClick} ><span className="material-symbols-outlined" style={{fontSize: '22px'}}>
+add
+</span></Button>
+
         )}
       </div>
       <div className="main">
@@ -88,6 +103,8 @@ const App: React.FC = () => {
               content={card.content}
               onContentChange={handleContentChange}
               creationDate={card.creationDate}
+              onColorChange={handleColorChange}
+              onDelete={handleDelete}
             />
           ))}
         </div>
