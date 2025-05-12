@@ -1,0 +1,70 @@
+.card-container {
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem 1rem 0.5rem;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.4);
+  
+    width: 250px;
+    height: 300px;
+    border: 2px solid black;
+    background-size: 32px 32px;
+  
+  }
+  
+  .content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 16px;
+  }
+  .content-section h1 {
+    font-size: 18px;
+    font-weight: bold;
+  
+    margin: 0;
+  }
+  
+  .content-section p {
+    color: rgb(18, 18, 18);
+    line-height: 2;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+  
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .creation-time {
+    font-size: 14px;
+    color: #2c2c2c;
+  }
+  
+  
+  .edit-btn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #3c3c3c1c;
+    border: 2px solid rgb(34, 34, 34);
+    border-radius: 999px;
+    padding: 3px;
+    transition: .2s ease-in-out;
+  }
+  .edit-btn:hover {
+    scale: 1.2;
+    background-color: #7d7d7d0f;
+  
+  
+  }
+  
+  

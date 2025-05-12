@@ -1,11 +1,12 @@
-import './App.css'
+import { NoteContextProvider } from './context/NoteContext'
+import { Dashboard } from './pages/Dashboard'
 
 function App() {
 
   return (
-    <>
-     <p>Hola</p>
-    </>
+    <NoteContextProvider>
+    <Dashboard/>
+  </NoteContextProvider>
   )
 }
 
