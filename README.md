@@ -1,54 +1,45 @@
-# React + TypeScript + Vite
+# ALL IN ORDER, ALL IN NOTES.
+*Organize your ideas, tasks and reminders in one place. Keep everything at your fingertips, clear and accessible, so nothing important slips through the cracks.*
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<img src="/public/readme-img.png" alt="Image"/>
 
-Currently, two official plugins are available:
+This is a web project of a notes application where users can create, edit and delete notes. It is built with React and TypeScript using the Vite rapid development environment. The project is designed to practice modern React development tools, state handling, and integration with TypeScript for a more robust development experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Click here to go to the project's website.](https://andreaalarconvaldes.github.io/notes-app/)
 
-## Expanding the ESLint configuration
+## Features:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Create notes:** Users can create new notes that are dynamically added to the page.
+- **Edit notes:** Users can edit the content of notes already created.
+- **Delete notes:** Users can delete any note from the list.
+- **Filter notes:** Users can filter by category.
+
+## Steps to run the project on your machine
+
+### Prerequisites:
+
+Make sure you have **Node.js** and **npm** installed on your system. You can check if you already have them installed by running the following commands in the terminal:
+
+
+```bash
+node -v
+npm -v
+```
+## 1. Clone the repository
 
 ```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+git clone https://github.com/AndreaAlarconValdes/notes-app.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 2. Install dependencies
 
 ```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+cd  notes-app 
+npm install
+```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## 3. Start the development server
+
+```js
+npm run dev
 ```
