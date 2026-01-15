@@ -14,21 +14,14 @@ export function FormModal({ closeModal, note = null }: FormModalProps) {
   const [creationTime, setCreationTime] = useState("");
   const [creationDay, setCreationDay] = useState("");
   const [category, setCategory] = useState<NoteCategory>("others");
-
-  const [color, setColor] = useState<string>(CategoryColors["others"]);
   const [error, setError] = useState<string>("");
   const { createNote, updateNote, deleteNote } = useNotes();
-
-  useEffect(() => {
-    setColor(CategoryColors[category]);
-  }, [category]);
 
   useEffect(() => {
     if (note) {
       setTitle(note.title);
       setDescription(note.description);
       setCategory(note.category);
-      setColor(note.color);
       setCreationDate(note.creationDate);
       setCreationTime(note.creationTime);
       setCreationDay(note.creationDay);
@@ -36,7 +29,6 @@ export function FormModal({ closeModal, note = null }: FormModalProps) {
       setTitle("");
       setDescription("");
       setCategory("important");
-      setColor(CategoryColors["important"]);
       setCreationDate("");
       setCreationTime("");
       setCreationDay("");

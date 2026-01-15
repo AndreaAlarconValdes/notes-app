@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import { createContext, useState, useCallback, type ReactNode } from "react";
 
 import { notes as data } from "../data/notes";
 import { CategoryColors, type Note } from "../types/note-object";
