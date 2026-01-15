@@ -1,43 +1,55 @@
-import { useContext, useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import "./Dashboard.css";
-import { NoteContext } from "../context/NoteContext";
+import { useNotes } from "../hooks/useNotes";
 import type { NoteCategory } from "../types/note-object";
 import { Card } from "../components/Card";
 import { FormModal } from "../components/FormModal";
 
+const FILTER_OPTIONS: {
+  key: "todas" | NoteCategory;
+  label: string;
+  color: string;
+}[] = [
+  { key: "todas", label: "All", color: "white" },
+  { key: "important", label: "Important", color: "#f4d79a" },
+  { key: "reminder", label: "Reminder", color: "#f4a89e" },
+  { key: "ideas", label: "Ideas", color: "#8cd5cb" },
+  { key: "pending", label: "Pending", color: "#84daf6" },
+  { key: "others", label: "Others", color: "#d59ef6" },
+];
+
 export function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { notes } = useContext(NoteContext);
+  const { notes } = useNotes();
   const [filter, setFilter] = useState<NoteCategory | "todas">("todas");
 
-  const filterOptions: {
-    key: "todas" | NoteCategory;
-    label: string;
-    color: string;
-  }[] = [
-    { key: "todas", label: "All", color: "white" },
-    { key: "important", label: "Important", color: "#f4d79a" },
-    { key: "reminder", label: "Reminder", color: "#f4a89e" },
-    { key: "ideas", label: "Ideas", color: "#8cd5cb" },
-    { key: "pending", label: "Pending", color: "#84daf6" },
-    { key: "others", label: "Others", color: "#d59ef6" },
-  ];
+  const filteredNotes = useMemo(() => {
+    return notes.filter((note) =>
+      filter === "todas" ? true : note.category === filter
+    );
+  }, [notes, filter]);
 
-  const filteredNotes = notes.filter((note) =>
-    filter === "todas" ? true : note.category === filter
-  );
+  const sortedNotes = useMemo(() => {
+    return [...filteredNotes].sort((a, b) => b.timestamp - a.timestamp);
+  }, [filteredNotes]);
 
-  const sortedNotes = [...filteredNotes].sort(
-    (a, b) => b.timestamp! - a.timestamp!
-  );
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { todas: notes.length };
+    FILTER_OPTIONS.forEach(({ key }) => {
+      if (key !== "todas") {
+        counts[key] = notes.filter((note) => note.category === key).length;
+      }
+    });
+    return counts;
+  }, [notes]);
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, []);
 
   return (
     <>
@@ -54,22 +66,15 @@ export function Dashboard() {
         </div>
         <div className="notes-container">
           <div className="filters">
-            {filterOptions.map(({ key, label, color }) => {
-              const count =
-                key === "todas"
-                  ? notes.length
-                  : notes.filter((note) => note.category === key).length;
-
-              return (
-                <button
-                  key={key}
-                  onClick={() => setFilter(key)}
-                  style={{ backgroundColor: color }}
-                >
-                  {label} ({count})
-                </button>
-              );
-            })}
+            {FILTER_OPTIONS.map(({ key, label, color }) => (
+              <button
+                key={key}
+                onClick={() => setFilter(key)}
+                style={{ backgroundColor: color }}
+              >
+                {label} ({categoryCounts[key]})
+              </button>
+            ))}
           </div>
           <div className="notes-list-container">
             {sortedNotes.map((note) => (

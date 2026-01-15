@@ -17,7 +17,7 @@ export interface Note {
   creationDay: string;
   color: string;
   category: NoteCategory;
-  timestamp?: number;
+  timestamp: number; // Required for proper sorting
 }
 
 

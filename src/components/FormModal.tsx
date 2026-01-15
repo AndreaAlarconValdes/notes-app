@@ -1,7 +1,7 @@
 import "./FormModal.css";
-import { NoteContext } from "../context/NoteContext";
 import { CategoryColors, type Note, type NoteCategory } from "../types/note-object";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNotes } from "../hooks/useNotes";
 
 interface FormModalProps {
   closeModal: () => void;
@@ -16,7 +16,8 @@ export function FormModal({ closeModal, note = null }: FormModalProps) {
   const [category, setCategory] = useState<NoteCategory>("others");
 
   const [color, setColor] = useState<string>(CategoryColors["others"]);
-  const { createNote, updateNote, deleteNote } = useContext(NoteContext);
+  const [error, setError] = useState<string>("");
+  const { createNote, updateNote, deleteNote } = useNotes();
 
   useEffect(() => {
     setColor(CategoryColors[category]);
@@ -40,53 +41,45 @@ export function FormModal({ closeModal, note = null }: FormModalProps) {
       setCreationTime("");
       setCreationDay("");
     }
+    setError("");
   }, [note]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (title.trim() === "" || description.trim() === "") {
-      alert("This field cannot be empty");
+    const trimmedTitle = title.trim();
+    const trimmedDescription = description.trim();
+    
+    if (trimmedTitle === "" || trimmedDescription === "") {
+      setError("Title and description cannot be empty");
       return;
     }
 
-    setTimeout(() => {
-      if (note) {
-        updateNote({
-          ...note,
-          title,
-          description,
-          category,
-          color: CategoryColors[category],
-          creationDate,
-          creationTime,
-          creationDay,
-        });
-      } else {
-        createNote({
-          title,
-          description,
-          color,
-          creationDate,
-          creationTime,
-          creationDay,
-          category,
-        });
-      }
-      setTitle("");
-      setDescription("");
-      setCreationDate("");
-      setCreationTime("");
-      setCreationDay("");
+    setError("");
 
-      closeModal();
-    }, 400);
+    if (note) {
+      updateNote({
+        ...note,
+        title: trimmedTitle,
+        description: trimmedDescription,
+        category,
+        color: CategoryColors[category],
+      });
+    } else {
+      createNote({
+        title: trimmedTitle,
+        description: trimmedDescription,
+        category,
+      });
+    }
+    
+    closeModal();
   };
-  const categoryColors: Record<NoteCategory, string> = {
-    important: "#f4d79a",
-    ideas: "#8cd5cb",
-    reminder: "#f4a89e",
-    pending: "#84daf6",
-    others: "#d59ef6",
+
+  const handleDelete = () => {
+    if (note && window.confirm("Are you sure you want to delete this note?")) {
+      deleteNote(note.id);
+      closeModal();
+    }
   };
 
   const categories: NoteCategory[] = [
@@ -125,7 +118,7 @@ export function FormModal({ closeModal, note = null }: FormModalProps) {
               type="button"
               onClick={() => setCategory(cat)}
               style={{
-                backgroundColor: categoryColors[cat],
+                backgroundColor: CategoryColors[cat],
                 transform: category === cat ? "scale(1.1)" : "scale(1)",
               }}
             >
@@ -136,20 +129,23 @@ export function FormModal({ closeModal, note = null }: FormModalProps) {
 
         <textarea
           placeholder="Description"
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-            setDescription(e.target.value)
-          }
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            setDescription(e.target.value);
+            setError("");
+          }}
           value={description}
         ></textarea>
+        {error && <p style={{ color: "#ff5959", margin: 0, fontSize: "14px" }}>{error}</p>}
         {note && (
-          <p>
+          <p style={{ margin: 0, fontSize: "14px", color: "#666" }}>
             {creationDay} {creationDate} - {creationTime}
           </p>
         )}
         <footer>
           {note && (
             <button
-              onClick={() => deleteNote(note.id)}
+              type="button"
+              onClick={handleDelete}
               style={{ backgroundColor: "#ff5959" }}
             >
               Delete

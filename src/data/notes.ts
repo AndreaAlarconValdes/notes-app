@@ -10,7 +10,8 @@ export const notes: Note[] = [
     creationDate: "February 5",
     creationTime: "21:30",
     creationDay: "Fri",
-    category:"ideas",
+    category: "ideas",
+    timestamp: new Date("2024-02-05T21:30:00").getTime(),
   },
   {
     id: 1,
@@ -21,8 +22,8 @@ export const notes: Note[] = [
     creationDate: "February 5",
     creationTime: "21:30",
     creationDay: "Fri",
-    category:"others",
-
+    category: "others",
+    timestamp: new Date("2024-02-05T21:30:00").getTime(),
   },
   {
     id: 2,
@@ -31,10 +32,10 @@ export const notes: Note[] = [
       "This is a personal project to practice and improve my skills. You can find the code on my GitHub @AndreaAlarconValdes",
     creationDate: "February 5",
     creationTime: "15:21",
-    color: "#f4a89e" ,
+    color: "#f4a89e",
     creationDay: "Fri",
-    category:"reminder",
-
+    category: "reminder",
+    timestamp: new Date("2024-02-05T15:21:00").getTime(),
   },
   {
     id: 3,
@@ -45,7 +46,7 @@ export const notes: Note[] = [
     creationTime: "11:04",
     color: "#f4d79a",
     creationDay: "Fri",
-    category:"important",
-
+    category: "important",
+    timestamp: new Date("2024-02-05T11:04:00").getTime(),
   },
 ];
